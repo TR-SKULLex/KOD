@@ -1,0 +1,43 @@
+import java.util.Scanner
+import java.util.Random
+fun main() {
+    val scanner = Scanner(System.`in`)
+    println("Hesap makinesine hoşgeldiniz! İşlem seçin:")
+    println("1. Toplama")
+    println("2. Çıkarma")
+    println("3. Çarpma")
+    println("4. Bölme")
+    print("Seçiminiz: ")
+
+    val choice = scanner.nextInt()
+    print("İlk sayıyı girin: ")
+    val num1 = scanner.nextDouble()
+    print("İkinci sayıyı girin: ")
+    val num2 = scanner.nextDouble()
+
+    when (choice) {
+        1 -> println("Sonuç: ${num1 + num2}")
+        2 -> println("Sonuç: ${num1 - num2}")
+        3 -> println("Sonuç: ${num1 * num2}")
+        4 -> println("Sonuç: ${num1 / num2}")
+        else -> println("Geçersiz seçim")
+    }
+
+val random = Random()
+
+val secretNumber = random.nextInt(100) + 1
+var guess = 0
+
+println("1 ile 100 arasında bir sayı tahmin edin:")
+while (secretNumber != guess) {
+    print("Tahmininiz: ")
+    guess = scanner.nextInt()
+    if (guess > secretNumber) {
+        println("Daha düşük bir sayı tahmin edin")
+    } else if (guess < secretNumber) {
+        println("Daha yüksek bir sayı tahmin edin")
+    } else {
+        println("Doğru tahmin! Tebrikler!")
+    }
+}
+}
