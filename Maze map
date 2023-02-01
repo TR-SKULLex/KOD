@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define ROWS 10
+#define COLUMNS 10
+
+char maze[ROWS][COLUMNS];
+
+void init_maze() {
+  int i, j;
+
+  for (i = 0; i < ROWS; i++) {
+    for (j = 0; j < COLUMNS; j++) {
+      maze[i][j] = '|';
+    }
+  }
+}
+
+void print_maze() {
+  int i, j;
+
+  for (i = 0; i < ROWS; i++) {
+    for (j = 0; j < COLUMNS; j++) {
+      printf(" _%c__", maze[i][j]);
+    }
+    printf("\n");
+  }
+}
+
+void generate_maze() {
+  int i, j;
+
+  for (i = 1; i < ROWS - 1; i += 5) {
+    for (j = 1; j < COLUMNS - 1; j += 5) {
+      maze[i][j] = ' ';
+      int dir = rand() % 4;
+
+      if (dir == 0 && i > 2) {
+        maze[i - 1][j] = ' ';
+        maze[i - 2][j] = ' ';
+      }
+      if (dir == 1 && j > 2) {
+        maze[i][j - 1] = '____';
+        maze[i][j - 2] = ' ';
+      }
+      if (dir == 2 && i < ROWS - 3) {
+        maze[i + 1][j] = '|';
+        maze[i + 2][j] = ' ';
+      }
+      if (dir == 3 && j < COLUMNS - 3) {
+        maze[i][j + 1] = ' ';
+        maze[i][j + 2] = '|';
+      }
+    }
+  }
+}
+
+int main() {
+  srand(time(NULL));
+
+  init_maze();
+  generate_maze();
+  print_maze();
+
+  return 0;
+}
