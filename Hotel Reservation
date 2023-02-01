@@ -1,0 +1,71 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+	
+int main()
+{
+int roomNumber, roomType, numDays, totalCost;
+int economicRooms[3] = {0, 1, 0};
+int middleRooms[3] = {1, 0, 0};
+int luxRooms[3] = {0, 0, 1};
+
+printf("Welcome to our hotel reservation system!\n");
+geri :printf("Please enter the room number you would like to reserve (1-3): ");
+scanf("%d", &roomNumber);
+printf("Please select the type of room you would like (1. Economic = $30/day, 2. Middle = $38/day, 3. Lux = $300/day): ");
+scanf("%d", &roomType);
+printf("Please enter the number of days you would like to stay: ");
+scanf("%d", &numDays);
+
+if(roomType == 1)
+{
+if(economicRooms[roomNumber - 1] == 0)
+{
+economicRooms[roomNumber - 1] = 1;
+totalCost = numDays * 30;
+printf("Your reservation for room %d, the Economic room, for %d days will cost a total of $%d.\n", roomNumber, numDays, totalCost);
+}
+else
+{
+printf("Sorry, that room is already reserved. Please select a different room.\n");goto geri;
+}
+}
+else if(roomType == 2)
+{
+if(middleRooms[roomNumber - 1] == 0)
+{
+middleRooms[roomNumber - 1] = 1;
+totalCost = numDays * 38;
+printf("Your reservation for room %d, the Middle room, for %d days will cost a total of $%d.\n", roomNumber, numDays, totalCost);
+}
+else
+{
+printf("Sorry, that room is already reserved. Please select a different room.\n"); goto geri;
+}
+}
+else if(roomType == 3)
+{
+if(luxRooms[roomNumber - 1] == 0)
+{
+luxRooms[roomNumber - 1] = 1;
+totalCost = numDays * 300;
+printf("Your reservation for room %d, the Lux room, for %d days will cost a total of $%d.\n", roomNumber, numDays, totalCost);
+}
+else
+{
+printf("Sorry, that room is already reserved. Please select a different room.\n"); goto geri;
+}
+}
+else
+{
+printf("Invalid room type. Please try again.\n"); goto geri;
+}
+
+return 0;
+}
+	
+	
+	
+
