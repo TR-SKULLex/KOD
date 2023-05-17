@@ -1,0 +1,54 @@
+#include <iostream>
+#include <algorithm>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+const char* const suits[4] = { "hearts", "diamonds", "clubs", "spades" };
+const char* const abbreviations[4] = { "h", "d", "c", "s" };
+
+int main() {
+    int player1Score = 0;
+    int player2Score = 0;
+
+    int cards[14] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
+
+    srand(time(0));
+
+    for (int i = 0; i < 14; i++) {
+        int randomIndex = rand() % (14 - i) + i;
+        int temp = cards[i];
+        cards[i] = cards[randomIndex];
+        cards[randomIndex] = temp;
+    }
+
+    for (int i = 0; i < 14; i++) {
+        int player1Card = cards[i];
+        int player2Card = cards[i];
+
+        if (player1Card > player2Card) {
+            player1Score++;
+        }
+        else if (player2Card > player1Card) {
+            player2Score++;
+        }
+
+        cout << "Player 1: " << abbreviations[player1Card / 14] << " " << (player1Card % 14) + 1 << endl;
+        cout << "Player 2: " << abbreviations[player2Card / 14] << " " << (player2Card % 14) + 1 << endl;
+    }
+
+    cout << "Player 1 Score: " << player1Score << endl;
+    cout << "Player 2 Score: " << player2Score << endl;
+
+    if (player1Score > player2Score) {
+        cout << "Player 1 Winner!" << endl;
+    }
+    else if (player2Score > player1Score) {
+        cout << "Player 2 Winner!" << endl;
+    }
+    else {
+        cout << "Draw!" << endl;
+    }
+
+    return 0;
+}
