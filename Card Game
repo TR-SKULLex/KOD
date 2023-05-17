@@ -13,7 +13,7 @@ int main() {
 
     int cards[14] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 
-    srand(time(0));
+    srand(time(NULL));
 
     for (int i = 0; i < 14; i++) {
         int randomIndex = rand() % (14 - i) + i;
@@ -24,7 +24,9 @@ int main() {
 
     for (int i = 0; i < 14; i++) {
         int player1Card = cards[i];
-        int player2Card = cards[i];
+
+        int randomIndex = rand() % (14 - i) + i;
+        int player2Card = cards[randomIndex];
 
         if (player1Card > player2Card) {
             player1Score++;
@@ -35,6 +37,10 @@ int main() {
 
         cout << "Player 1: " << abbreviations[player1Card / 14] << " " << (player1Card % 14) + 1 << endl;
         cout << "Player 2: " << abbreviations[player2Card / 14] << " " << (player2Card % 14) + 1 << endl;
+
+        int temp = cards[i];
+        cards[i] = cards[randomIndex];
+        cards[randomIndex] = temp;
     }
 
     cout << "Player 1 Score: " << player1Score << endl;
