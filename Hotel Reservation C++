@@ -1,0 +1,87 @@
+#include "hotel.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    Hotel hotel;
+    cout << "Welcome to our hotel reservation system!" << "\n";
+    hotel.reserveRoom();
+    return 0;
+}
+
+
+//-----------hotel.h---------------
+
+#pragma once
+#include<iostream>
+using namespace std;
+
+class Hotel {
+private:
+    int roomNumber;
+    int roomType;
+    int numDays;
+    int totalCost=0;
+    int economicRooms[3];
+    int middleRooms[3];
+    int luxRooms[3];
+public:
+    Hotel();
+    void reserveRoom();
+};
+
+//-------------hotel.cpp-------------
+#include "hotel.h"
+#include <iostream>
+
+using namespace std;
+Hotel::Hotel() {
+     economicRooms[3] = { 0, 1, 0 };
+     middleRooms[3] = { 1, 0, 0 };
+     luxRooms[3] = { 0, 0, 1 };
+}
+void Hotel::reserveRoom() {
+geri:cout << "Please enter the room number you would like to reserve (1-3): ";
+    cin >> roomNumber;
+    cout << "Please select the type of room you would like (1. Economic = $30/day, 2. Middle = $38/day, 3. Lux = $300/day): ";
+    cin >> roomType;
+    cout << "Please enter the number of days you would like to stay: ";
+    cin >> numDays;
+
+    if (roomType == 1) {
+        if (economicRooms[roomNumber - 1] == 0) {
+            economicRooms[roomNumber - 1] = 1;
+            totalCost = numDays * 30;
+            cout << "Your reservation for room " << roomNumber << ", the Economic room, for " << numDays << " days will cost a total of $" << totalCost << "." << endl;
+        }
+        else {
+            cout << "Sorry, that room is already reserved. Please select a different room." << endl; goto geri;
+        }
+    }
+    else if (roomType == 2) {
+        if (middleRooms[roomNumber - 1] == 0) {
+            middleRooms[roomNumber - 1] = 1;
+            totalCost = numDays * 38;
+            cout << "Your reservation for room " << roomNumber << ", the Middle room, for " << numDays << " days will cost a total of $" << totalCost << "." << endl;
+        }
+        else {
+            cout << "Sorry, that room is already reserved. Please select a different room." << endl; goto geri;
+        }
+    }
+    else if (roomType == 3) {
+        if (luxRooms[roomNumber - 1] == 0) {
+            luxRooms[roomNumber - 1] = 1;
+            totalCost = numDays * 300;
+            cout << "Your reservation for room " << roomNumber << ", the Lux room, for " << numDays << " days will cost a total of $" << totalCost << "." << endl;
+        }
+        else {
+            cout << "Sorry, that room is already reserved. Please select a different room." << endl;goto geri;
+        }
+    }
+    else {
+        cout << "Invalid room type. Please try again." << endl; goto geri;
+    }
+}
+
+
