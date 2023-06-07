@@ -37,10 +37,18 @@ public:
 
 using namespace std;
 Hotel::Hotel() {
-     economicRooms[3] = { 0, 1, 0 };
-     middleRooms[3] = { 1, 0, 0 };
-     luxRooms[3] = { 0, 0, 1 };
-}
+
+	for (int i = 0; i < 3; i++) {
+
+		economicRooms[i] = 0;
+		middleRooms[i] = 0;
+		luxRooms[i] = 0;
+	}
+	economicRooms[2] = 1;
+	middleRooms[1] = 1;
+	luxRooms[0] = 1;
+	totalCost = 0;  }
+
 void Hotel::reserveRoom() {
 geri:cout << "Please enter the room number you would like to reserve (1-3): ";
     cin >> roomNumber;
